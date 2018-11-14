@@ -13,7 +13,7 @@
     "picture": "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2310514390,3580363630&fm=27&gp=0.jpg",
     "product": "西瓜汁一扎",
     "price": 15.5,
-    "isCommented": true
+    "isCommented": false
   },
   {
     "id": 3,
@@ -21,6 +21,6 @@
     "picture": "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2310514390,3580363630&fm=27&gp=0.jpg",
     "product": "苹果汁一扎",
     "price": 10.9,
-    "isCommented": true
+    "isCommented": false
   }
 ]

@@ -1,5 +1,7 @@
 .orderItem {
   padding: 11px 10px 11px 15px;
+}
+.orderItem__container {
   display: flex;
 }
 .orderItem__picContainer {
