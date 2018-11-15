@@ -6,7 +6,8 @@ class OrderItem extends Component {
     super(props);
     this.state = {
       editing: false,
-      stars: 0
+      stars: props.data.stars || 0,
+      comment: props.data.comment || ""
     };
   }
   render() {
@@ -30,7 +31,7 @@ class OrderItem extends Component {
                 ) : (
                   <button
                     className="orderItem__btn orderItem__btn--red"
-                    onClick=""
+                    onClick={this.handleOpenEditArea}
                   >
                     评价
                   </button>
@@ -43,27 +44,101 @@ class OrderItem extends Component {
       </div>
     );
   }
+  /**
+   * 评论框
+   */
   renderEditArea() {
     return (
       <div className="orderItem__commentContainer">
-        <textarea className="orderItem__comment" />
+        <textarea
+          onChange={this.handleCommentChange}
+          value={this.state.comment}
+          className="orderItem__comment"
+        />
         {this.renderStars()}
-        <button className="orderItem__btn orderItem__btn--red">提交</button>
-        <button className="orderItem__btn orderItem__btn--gray">取消</button>
+        <button
+          className="orderItem__btn orderItem__btn--red"
+          onClick={this.handleSubmitComment}
+        >
+          提交
+        </button>
+        <button
+          className="orderItem__btn orderItem__btn--gray"
+          onClick={this.handleCancelComment}
+        >
+          取消
+        </button>
       </div>
     );
   }
+  /**
+   * 评分
+   */
   renderStars() {
     const { stars } = this.state;
     return (
       <div className="orderItem__stars">
         {[1, 2, 3, 4, 5].map((item, index) => {
-          const light = stars >= item ? "orderItem_star--light" : "";
-          return <span key={index}>★</span>;
+          const lightClass = stars >= item ? "orderItem_star--light" : "";
+          return (
+            <span
+              key={index}
+              onClick={this.handleClickStars.bind(this, item)}
+              className={"orderItem_star " + lightClass}
+            >
+              ★
+            </span>
+          );
         })}
       </div>
     );
   }
+  /**
+   * 评价
+   */
+  handleOpenEditArea = () => {
+    this.setState({
+      editing: true
+    });
+  };
+  /**
+   * 评论框数据变化
+   */
+  handleCommentChange = e => {
+    this.setState({
+      comment: e.target.value
+    });
+  };
+  /**
+   * 修改评分
+   */
+  handleClickStars(stars) {
+    this.setState({
+      stars: stars
+    });
+  }
+  /**
+   * 取消评论
+   */
+  handleCancelComment = () => {
+    this.setState({
+      editing: false,
+      stars: this.props.data.stars || 0,
+      comment: this.props.data.stars || ""
+    });
+  };
+  /**
+   * 确认评论
+   */
+  handleSubmitComment = () => {
+    const { id } = this.props.data;
+    const { comment, stars } = this.state;
+    this.setState({
+      editing: false
+    });
+    //调用父级方法
+    this.props.onSubmit(id, comment, stars);
+  };
 }
 
 export default OrderItem;
