@@ -43,5 +43,9 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
+涉及的技术点：
+React 的基础应用
+
+项目描述：
 我的订单
 组建划分、订单项组件、订单组件列表、获取订单数据
